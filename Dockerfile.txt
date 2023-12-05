@@ -1,0 +1,12 @@
+FROM centos:7
+RUN yum -y update
+
+# Sample link used for installation of jenkins for reference
+# https://linuxize.com/post/how-to-install-jenkins-on-centos-7/#:~:text=To%20install%20Jenkins%20on%20your%20CentOS%20system%2C%20follow,Jenkins%20by%20typing%3A%20sudo%20yum%20install%20jenkins%20
+RUN yum install java-1.8.0-openjdk-devel
+RUN curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+RUN sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+RUN yum install jenkins
+RUN service start jenkins
+
+EXPOSE 8080

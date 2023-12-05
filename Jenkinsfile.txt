@@ -1,0 +1,11 @@
+node {
+    stage ('Build') {
+        print('build stage')
+    }
+    stage ('Test') {
+        print('test stage')
+    }
+    stage ('deploy') {
+        sh "docker run -d -p 80:80 myapp:${version}"
+    }
+}
