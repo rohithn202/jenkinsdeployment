@@ -1,7 +1,6 @@
 node {
     stage ('checkout GIT') {
-        git branch: 'main',
-            credentialsId: 'Credential ID',
+        git branch: 'master',
             url: 'https://github.com/username/repository.git'
     }
     stage ('Build docker image') {
