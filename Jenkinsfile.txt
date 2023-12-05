@@ -1,15 +1,23 @@
 node {
     stage ('checkout GIT') {
         git branch: 'master',
-            url: 'https://github.com/username/repository.git'
+            credentialsId: 'git pat',
+            url: 'https://github.com/rohithn202/jenkinsdeployment.git'
+    }
+    stage ('sonarqube analysis') {
+        // sonar analysis.
     }
     stage ('Build docker image') {
         print('build stage')
+        bat 'docker build -f Dockerfile.txt -t centoswithjenkins'
+    }
+    stage ('push image to jfrog artifactory') {
+        print('artifact pushing image commands to be added')
     }
     stage ('Test') {
         print('test stage')
     }
     stage ('deploy') {
-        sh "docker run -d -p 80:80 myapp:${version}"
+        bat "docker run -itd -centoswithjenkins:7"
     }
 }
